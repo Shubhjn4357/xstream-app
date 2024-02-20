@@ -1,0 +1,28 @@
+.movie{
+  position: relative;
+  .source-poster {
+    width: 100%;
+    height: 100vh;
+    overflow-y: scroll;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position:fixed;
+    padding: 1.5rem;
+    top: 0;
+  }
+  .movie-details {
+    position: relative;
+    margin-top:25%;
+    .season {
+      margin-top: 20px;
+      padding: 10px;
+      border-radius: 8px;
+      .episode {
+        margin-top: 10px;
+        display: grid;
+        gap: 4;
+      }
+    }
+  }
+}

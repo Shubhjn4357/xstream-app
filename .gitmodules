@@ -1,0 +1,3 @@
+[submodule "xstream-api"]
+	path = xstream-api
+	url = https://github.com/Shubhjn4357/xstream-api.git
