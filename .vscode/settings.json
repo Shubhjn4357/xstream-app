@@ -1,3 +1,11 @@
 {
-    "files.exclude": { "**/.git": false }
+    "files.exclude": { "**/.git": false },
+    "cssVariables.lookupFiles": [
+        "**/*.css",
+        "**/*.scss",
+        "**/*.sass",
+        "**/*.less",
+        "node_modules/@mantine/core/styles.css"
+      ],
+      "compile-hero.disable-compile-files-on-did-save-code": false
 }

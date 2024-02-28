@@ -5,11 +5,11 @@ import useProxy from "../hooks/useProxy";
 
 const ImageContainer = ({props}:{props:IMovieResult|IAnimeResult|IAnimeInfo | IMovieInfo|{image:string,id:string}}) => {
     const {image,id}=props;
-    const {loading,response,error}=useProxy(image as string);
+    const {loading,response}=useProxy(image as string);
    
   return <>
-  {loading?<Loader/>:error?<img src="https://placehold.co/600x400?text=InternalServerError"/>:response?
-  <Image radius="lg" className="movie-poster" fit="cover" src={response} alt={id} fallbackSrc="https://placehold.co/600x400?text=NoImageFound" />:<Skeleton/>
+  {loading?<Loader/>:response?
+  <Image radius="md" className="movie-poster" fit="cover" src={response} alt={id} fallbackSrc="https://placehold.co/600x400?text=NoImageFound" />:<Skeleton/>
   }
   </>
 }

@@ -5,12 +5,13 @@ import { Flex, Avatar, Button, Tooltip, ActionIcon,Drawer, Text, Stack, Menu, Kb
 import {IconArrowBack, IconCategory2, IconCodeCircle2, IconDeviceFloppy, IconHome, IconLayoutList, IconMoonFilled, IconSearch, IconSettings, IconSunFilled, IconUserHexagon} from "@tabler/icons-react";
 import { IconPlayerPlayFilled } from "@tabler/icons-react";
 import { ScrollToTop } from ".";
+import { User as FirebaseUser } from "firebase/auth"
 
 const NavFlex=()=>{
-    const [LogOut,setLogOut]=useState<boolean>(false);
-    
+    const [LogOut,setLogOut]=useState<boolean>(false); 
     const [SideBar,setSideBar]=useState<boolean>(false);
-    const [largeScreen,setLargeScreen]=useState<boolean>(false);
+    const [largeScreen, setLargeScreen] = useState<boolean>(false);
+    const [UserProfile, setUserProfile] = useState<FirebaseUser | null | undefined>();
     const {user}=authenticator.useUser()
     const { setColorScheme } = useMantineColorScheme({
         keepTransitions: true,
@@ -103,23 +104,28 @@ const NavFlex=()=>{
       window.removeEventListener('resize', handleResize);
     };
   }, []);
+  useEffect(()=>{
+    if(user){
+        setUserProfile(user);
+    }
+  },[user])
       const SidebarToggle=()=>{
         setSideBar(!SideBar)
       }
       
       const userProfileSection=(
             <Stack gap={1} align="end" justify="center" w={100}>           
-                <Text fw="bolder" size="md" >{user?.displayName}</Text>  
+                <Text fw="bolder" size="md" >{UserProfile?.displayName}</Text>  
                 <Box w={100}>
-                    <Tooltip label={user?.email}>
-                        <Text size="sm" fw="bold" truncate="end">{user?.email}</Text>
+                  <Tooltip label={UserProfile?.email}>
+                      <Text size="sm" fw="bold" truncate="end">{UserProfile?.email}</Text>
                     </Tooltip>
                 </Box>
             </Stack> 
       )
-    return (<AppShell  className=" w-full">
+    return (<AppShell  className=" w-full" p={4} px={10}>
                             {/* <!-- Header --> */}
-                            <AppShell.Header  className="flex sticky top-0 flex-shrink items-center justify-between bg-transparent px-3">
+                            <AppShell.Header  className="flex sticky top-2 rounded-pill flex-shrink items-center justify-between glassmorphism px-3">
                                <Flex gap="3" align="center">
                                     {/*Toggle button*/}
                                         <ActionIcon variant="subtle" radius="lg" onClick={SidebarToggle} aria-label="Menu">
@@ -182,7 +188,7 @@ const NavFlex=()=>{
                             </AppShell.Header>
                            
                             {/* <!-- Main --> */}
-                            <AppShell.Main className="">
+                            <AppShell.Main p={4}>
                                  {/* -- Sidebar -- */}
                                  <Drawer offset={8} radius="lg" size="17rem" opened={SideBar} withCloseButton={false} onClose={SidebarToggle} >
                                     {/* Drawer content */}

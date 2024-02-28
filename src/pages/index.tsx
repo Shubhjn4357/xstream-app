@@ -12,5 +12,6 @@ import UserProfile from "./UserProfile";
 import WatchAnime from "./WatchAnime";
 import NoMatch from "./NoMatch";
 import Setting from "./Setting";
+import Watch from "./Watch";
 import "./pages.scss";
-export {Auth,Main,Home,SourceInfo,Setting,AnimeList,NoMatch,BookMark,EpisodeList,ErrHandler,Genre,Search,UserProfile,WatchAnime}
+export {Auth,Main,Home,Watch,SourceInfo,Setting,AnimeList,NoMatch,BookMark,EpisodeList,ErrHandler,Genre,Search,UserProfile,WatchAnime}

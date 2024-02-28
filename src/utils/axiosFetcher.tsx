@@ -42,6 +42,23 @@ class AxiosFetcher {
       throw error;
      }
   }
+  async getM3U8Proxy(url:string){
+    const encodedImageUrl = encodeURIComponent(url);
+    const headers = {}; // Replace with any headers you need to pass
+    const encodedHeaders = encodeURIComponent(JSON.stringify(headers));
+    const baseUri="https://xstream-api.vercel.app"
+    // const textUri="https://0.0.0.0:3000";
+     try {
+       const response=await axios.get(`${baseUri}/utils/m3u8-proxy?url=${encodedImageUrl}&headers=${encodedHeaders}`);
+       if (!response) {
+        throw new Error('No response from the proxy server.');
+      }
+       return response?.data;
+     } catch (error) {
+      console.error('Error fetching the proxied image:', error);
+      throw error;
+     }
+  }
 }
 const axiosFetcher=new AxiosFetcher();
 export default axiosFetcher;

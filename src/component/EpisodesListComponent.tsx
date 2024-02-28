@@ -6,8 +6,7 @@ import movieApi from '../utils/movieApi';
 import { EpisodesListInterface } from './PaginationHandler';
 
 export const EpisodesListComponent = ({ currentEpisode, source, hasEpisodes }: EpisodesListInterface) => {
-  const [server, setServer] = useState<IEpisodeServer>();
-  console.log("server",server)
+  const [server, setServer] = useState<IEpisodeServer |null >();
   const GetServer = async (episode: string, media: string) => {
     let server: IEpisodeServer | null = null;
     try {
@@ -31,13 +30,13 @@ export const EpisodesListComponent = ({ currentEpisode, source, hasEpisodes }: E
   return (
     <>
       {currentEpisode?
-        <Grid.Col span={hasEpisodes ? 3 : 12} key={currentEpisode?.id} className="episode bg-transparent my-4">
+        <Grid.Col span={hasEpisodes ? {xs: 12, sm: 6, md: 3} : 12} key={currentEpisode?.id} className="episode bg-transparent my-4">
           <Tooltip label={currentEpisode?.title}>
             <Text w={hasEpisodes ? 150 : "auto"} p={10} truncate>{currentEpisode?.title}</Text>
           </Tooltip>
           {server?(
             Object.entries(server).map(([key, serve])=>{
-              return <NavLink key={key} className="my-4" to={`/watch/${source?.id}/${serve?.name}/${currentEpisode?.id}`}>
+              return <NavLink key={key} className="p-1" to={`/watch/${source?.id}/${serve?.name}/${currentEpisode?.id}`}>
               <Button variant='filled'>{serve.name}</Button>
             </NavLink> 
             })

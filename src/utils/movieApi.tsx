@@ -33,8 +33,8 @@ class MovieAPI {
     async getServer(episodeId:string,mediaId:string){
         return await axiosFetcher.fetchWithAxios<IEpisodeServer>(`movies/flixhq/servers?episodeId=${episodeId}&mediaId=${mediaId}`);
     }
-    async getWatch(episodeId:string,mediaId:string,server:string){
-        return await axiosFetcher.fetchWithAxios<ISource>(`movies/flixhq/watch/${episodeId}/${mediaId}/${server}`);
+    async getWatch(episodeId:string,mediaId:string,server?:string){
+        return await axiosFetcher.fetchWithAxios<ISource>(`movies/fmovies/watch?episodeId=${episodeId}&mediaId=${mediaId}&server=${server}`);
     }
     
   

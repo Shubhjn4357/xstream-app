@@ -6,6 +6,7 @@ import { Paper, Text, Title } from '@mantine/core';
 import useProxy from '../hooks/useProxy';
 import { Slider } from '../component';
 import PaginationHandler from '../component/PaginationHandler';
+import animeApi from '../utils/animeApi';
 export interface season{
     season: number;
     image?: string;
@@ -16,7 +17,12 @@ const SourceInfo = () => {
   const [source, setSource] = useState<IAnimeInfo | IMovieInfo | null>(null);
   const {loading,response,error}=useProxy(source?.cover as string);
   useEffect(() => {
+    if(type==="anime"){
+      animeApi.getAnimeInfo(id).then(data=>setSource(data.data));
+    }
+    else{
       movieApi.getInfo(`${type}/${id}`).then(data=>setSource(data.data));
+    }
   }, [id,type])
   
   return (<Paper className='movie'>

@@ -33,6 +33,13 @@ const router = createBrowserRouter([
               },
             },
             {
+              path:"watch/:type/:id/:server/:epid",
+              async lazy() {
+                const {Watch } = await import("../pages");
+                return { Component: Watch};
+              },
+            },
+            {
               path:"bookmark",
               async lazy() {
                 const {BookMark } = await import("../pages");
